@@ -1,4 +1,8 @@
 
+using BookingSystem.Database;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+
 namespace BookingSystem
 {
     public class Program
@@ -8,11 +12,13 @@ namespace BookingSystem
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            //database
+            builder.Services.AddDbContext<DbBookingSystem>(options =>options.UseSqlServer(builder.Configuration.GetConnectionString("Local")));
 
             var app = builder.Build();
 

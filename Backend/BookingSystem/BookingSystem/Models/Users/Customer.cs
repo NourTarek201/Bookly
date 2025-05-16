@@ -2,7 +2,7 @@
 
 namespace BookingSystem.Models.Users
 {
-    public class Customer
+    public class Customer:BaseUser
     {
         public virtual List<BookedEvent> BookedEvents { get; set; } = new List<BookedEvent>();
 
