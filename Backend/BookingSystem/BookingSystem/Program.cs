@@ -1,5 +1,6 @@
 
 using BookingSystem.Database;
+using BookingSystem.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,8 +18,8 @@ namespace BookingSystem
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            //database
-            builder.Services.AddDbContext<DbBookingSystem>(options =>options.UseSqlServer(builder.Configuration.GetConnectionString("Local")));
+            //database extension
+            builder.Services.AddBookingSystemDb(builder.Configuration);
 
             var app = builder.Build();
 
@@ -31,6 +32,7 @@ namespace BookingSystem
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
