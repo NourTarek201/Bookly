@@ -1,0 +1,25 @@
+.main-container {
+    height: 100vh;
+    background-image: url('/assets/concert.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    flex-direction: column;
+}
+
+
+.main-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.main-description {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    color:black;
+}

@@ -1,0 +1,32 @@
+.navbar {
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 2rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.logo-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.logo {
+    height: 23px;
+    width: auto;
+    object-fit: contain;
+}
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+.navbar a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
