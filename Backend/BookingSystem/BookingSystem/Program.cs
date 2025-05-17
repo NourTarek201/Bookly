@@ -23,6 +23,9 @@ namespace BookingSystem
 
             builder.Services.AddAuthenJWT(builder.Configuration);
             builder.Services.AddUserRole();
+            builder.Services.AddScopedRepos();
+            builder.Services.AddScopedServices();
+            builder.Services.AddAuthorization();
 
             var app = builder.Build();
 
@@ -35,7 +38,6 @@ namespace BookingSystem
 
             app.UseHttpsRedirection();
 
-            builder.Services.AddAuthorization();
             app.UseAuthentication();
             app.UseAuthorization();
 

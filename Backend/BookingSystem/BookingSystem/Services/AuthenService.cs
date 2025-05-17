@@ -9,10 +9,10 @@ namespace BookingSystem.Services
     public class AuthenService
     {
         private readonly UserManager<BaseUser> userManager;
-        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly RoleManager<IdentityRole<Guid>> roleManager;
         private readonly JWTService jwtService;
 
-        public AuthenService(UserManager<BaseUser> userManager, RoleManager<IdentityRole> roleManager, JWTService jwtService)
+        public AuthenService(UserManager<BaseUser> userManager, RoleManager<IdentityRole<Guid>> roleManager, JWTService jwtService)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
@@ -38,16 +38,27 @@ namespace BookingSystem.Services
                     Country = user.Address.Country
                 };
                 newAddress.BaseUser = newUser;
+                newUser.Address = newAddress;
             }
+            var isUniqueEmail = await userManager.FindByEmailAsync(user.Email);
+            var isUniqueUsername = await userManager.FindByEmailAsync(user.Email);
+            if (isUniqueEmail!=null || isUniqueUsername!=null)
+            {
+                return null;
+            }
+
+
 
             var result = await userManager.CreateAsync(newUser, user.Password);
             if (!result.Succeeded){
                 var errors = string.Join(", ", result.Errors.Select(e => e.Description));
                 throw new Exception($"Registeration failed: {errors}");
+                //return null;
+
             }
 
             if (!await roleManager.RoleExistsAsync(role))
-                await roleManager.CreateAsync(new IdentityRole(role));
+                await roleManager.CreateAsync(new IdentityRole<Guid>(role));
 
             await userManager.AddToRoleAsync(newUser, role);
 

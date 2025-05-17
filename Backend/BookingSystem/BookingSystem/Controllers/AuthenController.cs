@@ -30,7 +30,16 @@ namespace BookingSystem.Controllers
             var token = await authenService.Registeration(user, "Customer");
             return Ok(new { token });
         }
+        [HttpPost("registerAdmin")]
+        public async Task<IActionResult> RegisterAdmin(RegisterationDTO user)
+        {
+            if (ValidationService.isEmptyDTO(user))
+            {
+                return BadRequest("fill required fields to proceed");
+            }
+            var token = await authenService.Registeration(user, "Admin");
+            return Ok(new { token });
+        }
 
-        
     }
 }

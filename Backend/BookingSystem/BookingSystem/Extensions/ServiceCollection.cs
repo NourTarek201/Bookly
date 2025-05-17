@@ -1,5 +1,8 @@
 ﻿using BookingSystem.Database;
 using BookingSystem.Models.Users;
+using BookingSystem.Repositories;
+using BookingSystem.Repositories.Interfaces;
+using BookingSystem.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -39,6 +42,22 @@ namespace BookingSystem.Extensions
         public static IServiceCollection AddUserRole(this IServiceCollection services)
         {
             services.AddIdentity<BaseUser, IdentityRole<Guid>>().AddEntityFrameworkStores<DbBookingSystem>().AddDefaultTokenProviders();
+
+            return services;
+        }
+
+        public static IServiceCollection AddScopedRepos(this IServiceCollection services)
+        {
+            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+
+            return services;
+        }
+
+        public static IServiceCollection AddScopedServices(this IServiceCollection services)
+        {
+            services.AddScoped<JWTService>();
+            services.AddScoped<AuthenService>();
+            services.AddScoped<ValidationService>();
 
             return services;
         }

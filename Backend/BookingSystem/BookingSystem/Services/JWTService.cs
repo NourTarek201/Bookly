@@ -26,11 +26,11 @@ public class JWTService
 
         claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]!));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["JwtSettings:SecretKey"]!));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         var token = new JwtSecurityToken(
-            issuer: config["Jwt:Issuer"],
+            issuer: config["JwtSettings:Issuer"],
             claims: claims,
             expires: DateTime.UtcNow.AddHours(1),
             signingCredentials: creds
