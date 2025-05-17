@@ -6,3 +6,12 @@
 ### ● UI Design on Figma
 
 ● check Figma design : https://www.figma.com/design/OwRyho0jKMpegmXdzEqxwu/Bookly?node-id=0-1&t=ICmd3G8VtQjmdpHP-1
+
+
+## How to Run 
+```bash
+cd Frontend
+```
+```bash
+ng serve
+```
