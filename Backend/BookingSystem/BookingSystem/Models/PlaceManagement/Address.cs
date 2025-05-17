@@ -10,7 +10,7 @@ namespace BookingSystem.Models.PlaceManagement
         public string Country { get; set; }
 
 
-        public virtual Venue Venue { get; set; }
-        public virtual BaseUser BaseUser { get; set; }
+        public virtual Venue? Venue { get; set; }
+        public virtual BaseUser? BaseUser { get; set; }
     }
 }
