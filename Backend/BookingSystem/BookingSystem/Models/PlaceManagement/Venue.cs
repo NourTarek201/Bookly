@@ -2,7 +2,7 @@
 
 namespace BookingSystem.Models.PlaceManagement
 {
-    public class Venue: BaseEntity
+    public class Venue : BaseEntity
     {
         public string Name { get; set; }
         public string PhoneNumber { get; set; }

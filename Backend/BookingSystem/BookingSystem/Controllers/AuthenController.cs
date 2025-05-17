@@ -7,6 +7,7 @@ using BookingSystem.Models.PlaceManagement;
 using BookingSystem.Models.Users;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.IdentityModel.Tokens;
+using BookingSystem.Services.Authentication;
 
 namespace BookingSystem.Controllers
 {
@@ -16,7 +17,7 @@ namespace BookingSystem.Controllers
     {
         private readonly AuthenService authenService;
 
-        public AuthenController(UserManager<BaseUser> userManager, AuthenService authenService)
+        public AuthenController( AuthenService authenService)
         {
             this.authenService = authenService;
         }

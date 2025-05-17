@@ -4,7 +4,7 @@ using BookingSystem.Models.Users;
 using Microsoft.AspNetCore.Identity;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace BookingSystem.Services
+namespace BookingSystem.Services.Authentication
 {
     public class AuthenService
     {
@@ -61,7 +61,6 @@ namespace BookingSystem.Services
                 await roleManager.CreateAsync(new IdentityRole<Guid>(role));
 
             await userManager.AddToRoleAsync(newUser, role);
-
             
             return await jwtService.getJWT(newUser);
         }
