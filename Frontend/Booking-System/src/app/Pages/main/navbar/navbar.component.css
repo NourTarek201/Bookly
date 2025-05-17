@@ -16,17 +16,21 @@
     width: auto;
     object-fit: contain;
 }
+.name{
+    font-size: 20px;
+    font-weight: bold
+}
 .navbar ul {
     list-style: none;
     display: flex;
-    gap: 1rem;
+    gap: 3rem;
+    align-items: center;
 }
 .navbar a {
     color: black;
     text-decoration: none;
-    font-weight: bold;
+    font-size: 15px;
 }
-
 .navbar a:hover {
     text-decoration: underline;
 }

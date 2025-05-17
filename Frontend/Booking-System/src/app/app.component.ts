@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from './navbar/navbar.component';
-import { MainComponent } from './main/main.component';
+import { RouterModule } from '@angular/router';  // <-- import RouterModule here
+import { MainComponent } from "./Pages/main/main.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent,MainComponent],
+  imports: [RouterModule, MainComponent],  // <-- import RouterModule (not RouterOutlet)
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']  // <-- fix typo here
 })
 export class AppComponent {
   title = 'Booking-System';
