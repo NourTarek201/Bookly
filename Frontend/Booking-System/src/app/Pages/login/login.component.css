@@ -1,0 +1,27 @@
+.split-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+.left-half, .right-half {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-half {
+    padding: 0;
+}
+
+.side-image {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.right-half {
+    background-color: white;
+    padding: 2rem;
+}
