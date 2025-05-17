@@ -41,5 +41,16 @@ namespace BookingSystem.Controllers
             return Ok(new { token });
         }
 
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(LoginDTO user)
+        {
+            if (ValidationService.isEmptyDTO(user))
+            {
+                return BadRequest("fill required fields to proceed");
+            }
+            var token = await authenService.Signin(user);
+            return Ok(new { token });
+        }
+
     }
 }
