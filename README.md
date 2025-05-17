@@ -1,4 +1,4 @@
-# Booking-System
+# Booking-System : Bookly
 
 ## Detailed and Completed Backend Logic
 
