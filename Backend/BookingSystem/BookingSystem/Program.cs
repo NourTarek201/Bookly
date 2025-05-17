@@ -21,6 +21,9 @@ namespace BookingSystem
             //database extension
             builder.Services.AddBookingSystemDb(builder.Configuration);
 
+            builder.Services.AddAuthenJWT(builder.Configuration);
+            builder.Services.AddUserRole();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -31,9 +34,6 @@ namespace BookingSystem
             }
 
             app.UseHttpsRedirection();
-
-            builder.Services.AddAuthenJWT(builder.Configuration);
-            builder.Services.AddUserRole();
 
             builder.Services.AddAuthorization();
             app.UseAuthentication();

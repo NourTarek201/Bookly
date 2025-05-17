@@ -38,7 +38,7 @@ namespace BookingSystem.Extensions
 
         public static IServiceCollection AddUserRole(this IServiceCollection services)
         {
-            services.AddIdentity<BaseUser, IdentityRole>().AddEntityFrameworkStores<DbBookingSystem>().AddDefaultTokenProviders();
+            services.AddIdentity<BaseUser, IdentityRole<Guid>>().AddEntityFrameworkStores<DbBookingSystem>().AddDefaultTokenProviders();
 
             return services;
         }

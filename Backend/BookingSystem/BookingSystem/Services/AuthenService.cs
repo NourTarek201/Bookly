@@ -6,13 +6,13 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BookingSystem.Services
 {
-    public class AuthService
+    public class AuthenService
     {
         private readonly UserManager<BaseUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly JWTService jwtService;
 
-        public AuthService(UserManager<BaseUser> userManager, RoleManager<IdentityRole> roleManager, JWTService jwtService)
+        public AuthenService(UserManager<BaseUser> userManager, RoleManager<IdentityRole> roleManager, JWTService jwtService)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;

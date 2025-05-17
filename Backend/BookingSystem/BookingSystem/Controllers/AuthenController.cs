@@ -5,48 +5,32 @@ using BookingSystem.Models;
 using BookingSystem.Services;
 using BookingSystem.Models.PlaceManagement;
 using BookingSystem.Models.Users;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BookingSystem.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AuthController : ControllerBase
+    public class AuthenController : ControllerBase
     {
-        private readonly UserManager<BaseUser> userManager;
-        private readonly JWTService jwtService;
-        private readonly ValidationService validationService;
+        private readonly AuthenService authenService;
 
-        public AuthController(UserManager<BaseUser> userManager, JWTService jwtService, ValidationService validationService)
+        public AuthenController(UserManager<BaseUser> userManager, AuthenService authenService)
         {
-            this.userManager = userManager;
-            this.jwtService = jwtService;
-            this.validationService = validationService;
+            this.authenService = authenService;
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterationDTO user)
         {
-            if(validationService.em)
-
-            var result = await userManager.CreateAsync(user, dto.Password);
-            if (!result.Succeeded)
-                return BadRequest(result.Errors);
-
-            await userManager.AddToRoleAsync(user, "Customer"); // or Admin if needed
-
-            var token = await jwtService.GetJWT(user);
+            if (ValidationService.isEmptyDTO(user)){
+                return BadRequest("fill required fields to proceed");
+            }
+            var token = await authenService.Registeration(user, "Customer");
             return Ok(new { token });
         }
 
-        [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginDTO dto)
-        {
-            var user = await userManager.FindByEmailAsync(dto.Email);
-            if (user == null || !await userManager.CheckPasswordAsync(user, dto.Password))
-                return Unauthorized("Invalid credentials");
-
-            var token = await jwtService.GetJWT(user);
-            return Ok(new { token });
-        }
+        
     }
 }
