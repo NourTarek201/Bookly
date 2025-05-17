@@ -20,23 +20,23 @@ namespace BookingSystem.Repositories
             await _context.SaveChangesAsync();
             return entity;
         }
-        public async Task<T> update(T entity)
+        public virtual async Task<T> update(T entity)
         {
             dbSet.Update(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
-        public async Task<T> delete(T entity)
+        public virtual async Task<T> delete(T entity)
         {
             await dbSet.Where(d => d.Id == entity.Id).ExecuteDeleteAsync();
             await _context.SaveChangesAsync();
             return entity;
         }
-        public async Task<IEnumerable<T>> getAll()
+        public virtual async Task<IEnumerable<T>> getAll()
         {
             return await dbSet.ToListAsync();
         }
-        public async Task<T> getById(Guid id)
+        public virtual async Task<T> getById(Guid id)
         {
             return await dbSet.FirstOrDefaultAsync(x => x.Id == id);
         }
