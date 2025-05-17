@@ -4,7 +4,7 @@ using BookingSystem.Models.PlaceManagement;
 using BookingSystem.Repositories;
 using BookingSystem.Repositories.Interfaces;
 using Microsoft.IdentityModel.Tokens;
-namespace BookingSystem.Services.EventServices
+namespace BookingSystem.services.EventServices
 {
     public class EventService 
     {

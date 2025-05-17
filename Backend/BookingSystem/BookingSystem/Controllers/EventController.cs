@@ -2,14 +2,14 @@
 using Microsoft.AspNetCore.Identity;
 using BookingSystem.DTOs;
 using BookingSystem.Models;
-using BookingSystem.Services;
+using BookingSystem.services;
 using BookingSystem.Models.PlaceManagement;
 using BookingSystem.Models.Users;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.IdentityModel.Tokens;
-using BookingSystem.Services.Authentication;
+using BookingSystem.services.Authentication;
 using BookingSystem.Models.EventManagement;
-using BookingSystem.Services.EventServices;
+using BookingSystem.services.EventServices;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
@@ -26,22 +26,20 @@ namespace BookingSystem.Controllers
             this.eventService = eventService;
         }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(AuthenticationSchemes = "Bearer",Roles = "Admin")]
         [HttpPost("Add")]
         public async Task<IActionResult> AddEvent([FromBody] EventDTO newEvent)
         {
-            //var userIdString = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var userIdString = "5E6B9465-51AC-435C-C52D-08DD954374A3";
-            //if (string.IsNullOrEmpty(userIdString))
-            //{
-            //    return Unauthorized("Please sign in as an Admin first.");
-            //}
+            var userIdString = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            if (string.IsNullOrEmpty(userIdString))
+            {
+                return Unauthorized("Please sign in as an Admin first.");
+            }
 
             if (!Guid.TryParse(userIdString, out Guid userGuid))
             {
                 return BadRequest("Invalid Admin ID.");
             }
-            //Console.WriteLine("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWww",userGuid);
             if (ValidationService.isEmptyDTO(newEvent)){
                 return BadRequest("fill required fields to proceed");
             }
@@ -50,6 +48,7 @@ namespace BookingSystem.Controllers
             return Ok(newEvent);
         }
 
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Customer")]
         [HttpGet("All")]
         public async Task<IActionResult> getAllEvents()
         {

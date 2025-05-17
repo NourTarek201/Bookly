@@ -2,9 +2,10 @@
 using BookingSystem.Models.Users;
 using BookingSystem.Repositories;
 using BookingSystem.Repositories.Interfaces;
-using BookingSystem.Services;
-using BookingSystem.Services.Authentication;
-using BookingSystem.Services.EventServices;
+using BookingSystem.services;
+using BookingSystem.services.Authentication;
+using BookingSystem.services.EventServices;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -26,14 +27,33 @@ namespace BookingSystem.Extensions
             services.AddAuthentication("Bearer").AddJwtBearer("Bearer", options =>
             {
                 var jwt = configuration.GetSection("JwtSettings");
+                var secretKey = jwt["SecretKey"];
+                if (string.IsNullOrEmpty(secretKey))
+                {
+                    throw new ArgumentNullException(nameof(secretKey), "JWT SecretKey cannot be null or empty.");
+                }
+                options.Events = new JwtBearerEvents
+                {
+                    OnAuthenticationFailed = context =>
+                    {
+                        Console.WriteLine($"Token Error: {context.Exception.Message}");
+                        return Task.CompletedTask;
+                    },
+                    OnTokenValidated = context =>
+                    {
+                        Console.WriteLine("Token Validated Successfully");
+                        return Task.CompletedTask;
+                    }
+                };
+
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
-                    ValidateAudience = true,
+                    ValidateAudience = false,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = jwt["Issuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt["SecretKey"]))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
                 };
             });
 
@@ -55,6 +75,7 @@ namespace BookingSystem.Extensions
             services.AddScoped<CategoryRepository>();
             services.AddScoped<AddressRepository>();
             services.AddScoped<EventRepository>();
+            services.AddScoped<BookedEventRepository>();
             return services;
         }
 
@@ -64,6 +85,7 @@ namespace BookingSystem.Extensions
             services.AddScoped<AuthenService>();
             services.AddScoped<ValidationService>();
             services.AddScoped<EventService>();
+            services.AddScoped<BookingService>();
             return services;
         }
 
@@ -75,7 +97,7 @@ namespace BookingSystem.Extensions
                 {
                     Name = "Authorization",
                     Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
-                    Scheme = "bearer",
+                    Scheme = "Bearer",
                     BearerFormat = "JWT",
                     In = Microsoft.OpenApi.Models.ParameterLocation.Header,
                     Description = "Enter your JWT token."

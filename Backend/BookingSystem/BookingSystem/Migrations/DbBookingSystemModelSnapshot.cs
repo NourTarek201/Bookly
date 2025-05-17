@@ -612,11 +612,9 @@ namespace BookingSystem.Migrations
 
             modelBuilder.Entity("BookingSystem.Models.PlaceManagement.Address", b =>
                 {
-                    b.Navigation("BaseUser")
-                        .IsRequired();
+                    b.Navigation("BaseUser");
 
-                    b.Navigation("Venue")
-                        .IsRequired();
+                    b.Navigation("Venue");
                 });
 
             modelBuilder.Entity("BookingSystem.Models.PlaceManagement.Venue", b =>

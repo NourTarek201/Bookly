@@ -1,4 +1,4 @@
-﻿namespace BookingSystem.Services
+﻿namespace BookingSystem.services
 {
     public class ValidationService
     {

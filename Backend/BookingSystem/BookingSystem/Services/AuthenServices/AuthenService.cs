@@ -4,7 +4,7 @@ using BookingSystem.Models.Users;
 using Microsoft.AspNetCore.Identity;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace BookingSystem.Services.Authentication
+namespace BookingSystem.services.Authentication
 {
     public class AuthenService
     {

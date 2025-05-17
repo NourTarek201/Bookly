@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingSystem.Migrations
 {
     [DbContext(typeof(DbBookingSystem))]
-    [Migration("20250516102211_modelss")]
-    partial class modelss
+    [Migration("20250517164129_all")]
+    partial class all
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -615,11 +615,9 @@ namespace BookingSystem.Migrations
 
             modelBuilder.Entity("BookingSystem.Models.PlaceManagement.Address", b =>
                 {
-                    b.Navigation("BaseUser")
-                        .IsRequired();
+                    b.Navigation("BaseUser");
 
-                    b.Navigation("Venue")
-                        .IsRequired();
+                    b.Navigation("Venue");
                 });
 
             modelBuilder.Entity("BookingSystem.Models.PlaceManagement.Venue", b =>

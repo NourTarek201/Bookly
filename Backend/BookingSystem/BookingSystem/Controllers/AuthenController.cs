@@ -2,12 +2,12 @@
 using Microsoft.AspNetCore.Identity;
 using BookingSystem.DTOs;
 using BookingSystem.Models;
-using BookingSystem.Services;
+using BookingSystem.services;
 using BookingSystem.Models.PlaceManagement;
 using BookingSystem.Models.Users;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.IdentityModel.Tokens;
-using BookingSystem.Services.Authentication;
+using BookingSystem.services.Authentication;
 
 namespace BookingSystem.Controllers
 {

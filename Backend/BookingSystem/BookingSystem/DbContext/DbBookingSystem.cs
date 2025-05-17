@@ -10,9 +10,10 @@ namespace BookingSystem.Database
 {
     public class DbBookingSystem : IdentityDbContext<BaseUser, IdentityRole<Guid>, Guid>
     {
-        public DbBookingSystem(DbContextOptions<DbBookingSystem> options): base(options)
+        public DbBookingSystem(DbContextOptions<DbBookingSystem> options) : base(options)
         {
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -20,21 +21,19 @@ namespace BookingSystem.Database
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DbBookingSystem).Assembly);
         }
 
-        //event management
+        // Event management  
         public DbSet<Event> Events { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<BookedEvent> BookedEvents { get; set; }
         public DbSet<EventTag> EventTags { get; set; }
-        public DbSet<Tag>Tags { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
-
-        //place management
+        // Place management  
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Venue> Venues { get; set; }
 
-        //users
+        // Users  
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Customer> Customers { get; set; }
-
     }
 }
