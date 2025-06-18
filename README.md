@@ -1,9 +1,5 @@
 # Booking-System : Bookly
-
-### Detailed and Completed Backend with Bonus
-
-### Uncompleted Frontend
-
+### .NET / Angular
 
 ## Main Page
 ![Screenshot 2025-05-17 231032](https://github.com/user-attachments/assets/a1e67377-6b14-4cb5-9432-c8bf3ac4c653)
